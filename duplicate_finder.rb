@@ -41,9 +41,11 @@ File.open("duplicates.log","w") do |log|
       
       if table.key?(hash.to_s.to_sym)
         log.puts "#{file} is duplicate of #{table[hash.to_s.to_sym]}"
+      else
+        table[hash.to_s.to_sym] = file 
       end
       IO::console.clear_screen()
-      percent = (index.to_f/files.size.to_f).round(3)
+      percent = (index.to_f/(files.size.to_f-1)*100).round(3)
       puts "Checking: #{file}"
       puts ""
       puts "#{percent}%  Done"
